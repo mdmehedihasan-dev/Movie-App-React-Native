@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
-import { View, Text, ActivityIndicator, FlatList, Image } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, FlatList, Image, Text, View } from "react-native";
 
-import { images } from "@/constants/images";
 import { icons } from "@/constants/icons";
+import { images } from "@/constants/images";
 
-import useFetch from "@/services/usefetch";
 import { fetchMovies } from "@/services/api";
 import { updateSearchCount } from "@/services/appwrite";
+import useFetch from "@/services/usefetch";
 
-import SearchBar from "@/components/SearchBar";
 import MovieDisplayCard from "@/components/MovieCard";
+import SearchBar from "@/components/SearchBar";
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -48,7 +48,7 @@ const Search = () => {
     <View className="flex-1 bg-primary">
       <Image
         source={images.bg}
-        className="flex-1 absolute w-full z-0"
+        className="absolute z-0 flex-1 w-full"
         resizeMode="cover"
       />
 
@@ -66,7 +66,7 @@ const Search = () => {
         contentContainerStyle={{ paddingBottom: 100 }}
         ListHeaderComponent={
           <>
-            <View className="w-full flex-row justify-center mt-20 items-center">
+            <View className="flex-row items-center justify-center w-full mt-20">
               <Image source={icons.logo} className="w-12 h-10" />
             </View>
 
@@ -87,7 +87,7 @@ const Search = () => {
             )}
 
             {error && (
-              <Text className="text-red-500 px-5 my-3">
+              <Text className="px-5 my-3 text-red-500">
                 Error: {error.message}
               </Text>
             )}
@@ -96,7 +96,7 @@ const Search = () => {
               !error &&
               searchQuery.trim() &&
               movies?.length! > 0 && (
-                <Text className="text-xl text-white font-bold">
+                <Text className="text-xl font-bold text-white">
                   Search Results for{" "}
                   <Text className="text-accent">{searchQuery}</Text>
                 </Text>
@@ -105,7 +105,7 @@ const Search = () => {
         }
         ListEmptyComponent={
           !loading && !error ? (
-            <View className="mt-10 px-5">
+            <View className="px-5 mt-10">
               <Text className="text-center text-gray-500">
                 {searchQuery.trim()
                   ? "No movies found"
